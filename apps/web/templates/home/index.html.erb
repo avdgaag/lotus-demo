@@ -3,7 +3,7 @@
 <% if articles.any? %>
   <% articles.each do |article| %>
     <div class="article">
-      <h3 class="article__title"><%= article.title %></h3>
+      <h3 class="article__title"><a href="/articles/<%= article.id %>" rel="permalink"><%= article.title %></a></h3>
       <div clas="article__body">
         <%= article.body %>
       </div>
