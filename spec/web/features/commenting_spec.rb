@@ -25,6 +25,7 @@ describe 'Commenting on articles' do
       click_button 'Submit Comment'
       assert page.has_css?('.comments__heading', text: '1 comment'), 'there is no comments heading'
       assert page.has_css?('.comment__body', text: 'Nice post!'), 'there is no comment'
+      assert page.has_css?('.flash--notice', text: 'Comment added'), 'there was no flash notice'
     end
   end
 end

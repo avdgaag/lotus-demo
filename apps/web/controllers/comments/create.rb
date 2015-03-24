@@ -13,8 +13,10 @@ module Web::Controllers::Comments
     end
 
     def call(params)
-      if params.valid?
-        @comment_repository.create(Demo::Comment.new(params))
+      if params.valid? && @comment_repository.create(Demo::Comment.new(params))
+        flash[:notice] = 'Comment added'
+      else
+        flash[:alert] = 'Something went wrong. Please try again.'
       end
       redirect_to "/articles/#{params[:article_id]}"
     end

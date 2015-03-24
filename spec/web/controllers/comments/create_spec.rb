@@ -28,5 +28,15 @@ module Web::Controllers::Comments
         comment_repository.verify
       end
     end
+
+    it 'assigns a flash notice when comment was created' do
+      action.call(params)
+      assert_equal 'Comment added', action.send(:flash)[:notice]
+    end
+
+    it 'assigns a flash alert when comment was not created' do
+      action.call({})
+      assert_equal 'Something went wrong. Please try again.', action.send(:flash)[:alert]
+    end
   end
 end

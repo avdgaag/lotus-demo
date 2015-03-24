@@ -6,6 +6,11 @@
   </head>
   <body>
     <div id="page">
+      <% each_flash do |style, message| %>
+        <div class="flash flash--<%= style %>">
+          <%= message %>
+        </div>
+      <% end %>
       <h1><a href="<%= routes.root_path %>" rel="home">Lotus example blog</a></h1>
       <%= yield %>
     </div>
