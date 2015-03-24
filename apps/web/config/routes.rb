@@ -5,5 +5,5 @@
 #
 # This route will look for `Web::Controllers::Home::Index` action in `apps/web/controllers/home/index.rb`.
 # Please, uncomment the following line to have a working example.
-get '/', to: 'home#index'
-get '/articles/:id', to: 'articles#show'
+get '/', to: 'home#index', as: 'root'
+get '/articles/:id', to: 'articles#show', as: 'article'
