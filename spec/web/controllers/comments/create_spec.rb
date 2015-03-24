@@ -21,5 +21,12 @@ module Web::Controllers::Comments
       action.call(params)
       comment_repository.verify
     end
+
+    it 'does not create a comment when a parameter is missing' do
+      action.call({})
+      assert_raises(MockExpectationError, 'create should not have been called') do
+        comment_repository.verify
+      end
+    end
   end
 end
