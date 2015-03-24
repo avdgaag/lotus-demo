@@ -4,3 +4,36 @@
     <%= article.body %>
   </div>
 </div>
+
+<% if comments.any? %>
+  <h3 class="comments__heading"><%= comments_header %></h3>
+  <ol class="comments__list">
+    <% comments.each do |comment| %>
+      <li class="comment">
+        <footer class="comment__meta">
+          <span class="comment__author"><%= comment.author %></span>
+          on
+          <span class="comment__created-at"><%= comment.created_at %></span>:
+        </footer>
+        <blockquote class="comment__body">
+          <%= comment.body %>
+        </blockquote>
+      </li>
+    <% end %>
+  </ol>
+<% end %>
+
+<h3>Leave a comment</h3>
+<form action="<%= routes.article_comments_path(article_id: article.id) %>" method="post">
+  <p>
+    <label for="comment_author">Name</label>
+    <input type="text" id="comment_author" name="author" value="">
+  </p>
+  <p>
+    <label for="comment_body">Comment</label>
+    <textarea id="comment_body" name="body"></textarea>
+  </p>
+  <p>
+    <input type="submit" value="Submit Comment">
+  </p>
+</form>

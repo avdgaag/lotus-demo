@@ -7,3 +7,4 @@
 # Please, uncomment the following line to have a working example.
 get '/', to: 'home#index', as: 'root'
 get '/articles/:id', to: 'articles#show', as: 'article'
+post '/articles/:article_id/comments', to: 'comments#create', as: 'article_comments'
