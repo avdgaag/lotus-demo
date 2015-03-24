@@ -14,6 +14,7 @@ gem 'lotusrb',                           github: 'lotus/lotus'
 
 
 gem 'pg'
+gem 'kramdown'
 
 group :test do
   gem 'minitest'

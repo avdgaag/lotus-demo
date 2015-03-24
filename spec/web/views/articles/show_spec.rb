@@ -6,8 +6,8 @@ module Web::Views::Articles
     let(:template)  { Lotus::View::Template.new('apps/web/templates/articles/show.html.erb') }
     let(:view)      { Web::Views::Articles::Show.new(template, exposures) }
 
-    it "exposes #article" do
-      assert_same exposures[:article], view.article, 'view should have exposed article'
+    it 'exposes #article wrapped in a presenter' do
+      assert_kind_of Web::Presenters::ArticlePresenter, view.article, 'article should have been wrapped in a presenter'
     end
   end
 end
