@@ -13,6 +13,8 @@ This is a very simple Lotus example application to demonstrate the basics of the
 6. Testing with Minitest
 7. Database migrations
 
+For a guide walking you through this application, see [http://arjanvandergaag.nl/blog/up-and-running-with-lotus.html](http://arjanvandergaag.nl/blog/up-and-running-with-lotus.html).
+
 ## Setup
 
 Running this application locally is simple. First, make sure you have a working
