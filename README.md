@@ -1,4 +1,4 @@
-# Example Lotus blog application
+# Example Lotus blog application [![Build Status](https://travis-ci.org/avdgaag/lotus-demo.svg?branch=master)](https://travis-ci.org/avdgaag/lotus-demo)
 
 ## Introduction
 
