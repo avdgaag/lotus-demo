@@ -1,3 +1,8 @@
 language: ruby
+cache: bundler
 rvm:
   - 2.2.1
+bundler_args: --binstubs
+before_script:
+  - psql -c 'create database demo_test;' -U postgres
+  - bin/sequel -m db/migrations postgres://localhost/demo_test
