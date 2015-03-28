@@ -9,14 +9,14 @@ GIT
 
 GIT
   remote: git://github.com/lotus/helpers.git
-  revision: 51c44e782ae64b7a17b9e9271402541739fce27f
+  revision: 0ea275727f71b3677ef79b7530de96a9801e7bd9
   specs:
     lotus-helpers (0.1.0)
       lotus-utils (~> 0.4)
 
 GIT
   remote: git://github.com/lotus/lotus.git
-  revision: 501776e6d13a60d2aeb050d9ea1ba36d491cf2be
+  revision: 31f392a2b58e08da14c0c3f106392f3a2160cff5
   specs:
     lotusrb (0.3.0)
       dotenv (~> 1.0)
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: git://github.com/lotus/model.git
-  revision: 0d535e467f5f8dd6ca7653c3d790c2dcb5c676ab
+  revision: b64753f79bd2bb9623f3d5ce8c1c942fe964f762
   specs:
     lotus-model (0.3.0)
       lotus-utils (~> 0.4)
