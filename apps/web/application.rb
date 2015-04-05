@@ -231,6 +231,8 @@ module Web
       # scheme 'https'
       # host   'example.org'
       # port   443
+
+      serve_assets      true
     end
   end
 end
