@@ -8,12 +8,13 @@ module Web::Controllers::Comments
       param :body, presence: true
     end
 
-    def initialize(comment_repository: Demo::CommentRepository)
-      @comment_repository = comment_repository
+    def initialize(interactor: Demo::CreateComment)
+      @interactor = interactor
     end
 
     def call(params)
-      if params.valid? && @comment_repository.create(Demo::Comment.new(params))
+      result = @interactor.new(params: params).call
+      if result.success?
         flash[:notice] = 'Comment added'
       else
         flash[:alert] = 'Something went wrong. Please try again.'
