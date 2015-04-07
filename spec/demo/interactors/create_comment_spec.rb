@@ -2,35 +2,46 @@ require_relative '../../spec_helper'
 
 module Demo
   describe CreateComment do
-    let(:repository) { Minitest::Mock.new }
-    let(:params) { Lotus::Action::Params.new({ author: 'John' }) }
-    let(:create_comment) { CreateComment.new(params: params, repository: repository) }
-
-    before do
-      repository.expect :is_a?, false, [Hash]
-      repository.expect :is_a?, false, [Class]
-    end
+    let(:create_comment) { CreateComment.new(params: params) }
 
     after do
-      repository.verify
+      ArticleRepository.clear
+      CommentRepository.clear
     end
 
-    it 'is unsuccessful when the params are invalid' do
-      params.stub :valid?, false do
-        refute create_comment.call.success?
+    describe 'with valid params' do
+      let(:article) { ArticleRepository.create(Article.new(title: 'Interactor article', body: 'Example article')) }
+      let(:params) { Lotus::Action::Params.new(author: 'John', body: 'Hello, world', article_id: article.id) }
+
+      it 'results in a success' do
+        assert create_comment.call.success?
+      end
+
+      it 'created a comment using the params' do
+        before_count = CommentRepository.all.size
+        create_comment.call
+        after_count = CommentRepository.all.size
+        assert_equal before_count + 1, after_count, 'There should have been one more comment'
+        last_comment = CommentRepository.last
+        assert_equal 'John', last_comment.author
+      end
+
+      it 'reports persistence exception as an error' do
+        result = nil
+        CommentRepository.stub :persist, -> { raise 'persistence error' } do
+          result = create_comment.call
+        end
+        refute result.success?, 'result should not have been success'
+        assert_equal ['saving failed'], result.errors
       end
     end
 
-    it 'creates a comment using the params when they are valid' do
-      repository.expect :persist, true, [Comment.new(author: 'John')]
-      assert create_comment.call.success?
-    end
+    describe 'with invalid params' do
+      let(:params) { Lotus::Action::Params.new({}) }
 
-    it 'is not successful when creating the comment fails' do
-      repository.expect :persist, false, [Comment.new(author: 'John')]
-      result = create_comment.call
-      refute result.success?, 'result should not have been success'
-      assert_equal 1, result.errors.count
+      it 'is unsuccessful when the params are invalid' do
+        refute create_comment.call.success?
+      end
     end
   end
 end
